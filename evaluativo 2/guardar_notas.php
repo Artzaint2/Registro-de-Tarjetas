@@ -5,12 +5,10 @@ $matematicas = $_POST['matematicas'];
 $fisica = $_POST['fisica'];
 $programacion = $_POST['programacion'];
 
-// Validar campos vacíos
 if ($cedula === '' || $nombre === '' || !is_numeric($matematicas) || !is_numeric($fisica) || !is_numeric($programacion)) {
     die('Por favor, complete todos los campos correctamente.');
 }
 
-// Calcular resultados
 $nota_promedio_matematicas = ($matematicas + $fisica + $programacion) / 3;
 $nota_promedio_fisica = ($matematicas + $fisica + $programacion) / 3;
 $nota_promedio_programacion = ($matematicas + $fisica + $programacion) / 3;
@@ -35,7 +33,6 @@ $nota_maxima_matematicas = max($matematicas, $fisica, $programacion);
 $nota_maxima_fisica = max($matematicas, $fisica, $programacion);
 $nota_maxima_programacion = max($matematicas, $fisica, $programacion);
 
-// Construir la fila de la tabla con los datos ingresados
 $tabla = "<tr>
             <td>$cedula</td>
             <td>$nombre</td>
@@ -44,7 +41,6 @@ $tabla = "<tr>
             <td>$programacion</td>
         </tr>";
 
-// Construir los resultados
 $resultados = "<p>Resultados:</p>
                 <ul>
                     <li>Nota promedio de Matemáticas: $nota_promedio_matematicas</li>
@@ -63,9 +59,6 @@ $resultados = "<p>Resultados:</p>
                     <li>Nota máxima en Programación: $nota_maxima_programacion</li>
                 </ul>";
 
-// Devolver la fila de la tabla al cliente
 echo $tabla;
-
-// Devolver los resultados al cliente
 echo $resultados;
 ?>
