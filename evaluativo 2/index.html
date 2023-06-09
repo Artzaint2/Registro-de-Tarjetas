@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro de notas</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+    <h1>Registro de notas</h1>
+
+    <form id="formulario">
+        <label>Cédula:</label>
+        <input type="text" id="cedula" required><br>
+
+        <label>Nombre:</label>
+        <input type="text" id="nombre" required><br>
+
+        <label>Nota de Matemáticas:</label>
+        <input type="number" id="matematicas" required><br>
+
+        <label>Nota de Física:</label>
+        <input type="number" id="fisica" required><br>
+
+        <label>Nota de Programación:</label>
+        <input type="number" id="programacion" required><br>
+
+        <input type="submit" value="Guardar">
+    </form>
+
+    <h2>Tabla de notas</h2>
+    <table id="tabla" border="1">
+        <tr>
+            <th>Cédula</th>
+            <th>Nombre</th>
+            <th>Matemáticas</th>
+            <th>Física</th>
+            <th>Programación</th>
+        </tr>
+    </table>
+
+    <div id="resultados">
+        <h2>Resultados</h2>
+        <table id="tabla-resultados" border="1">
+            <tr>
+                <th>Materia</th>
+                <th>Nota promedio</th>
+                <th>Alumnos aprobados</th>
+                <th>Alumnos aplazados</th>
+                <th>Alumnos que aprobaron una materia</th>
+                <th>Alumnos que aprobaron dos materias</th>
+                <th>Nota máxima</th>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
