@@ -1,28 +1,23 @@
 $(document).ready(function() {
-    // Manejar el evento de envío del formulario
     $('#formulario').submit(function(event) {
         event.preventDefault();
-
-        // Obtener los valores del formulario
+        
         var cedula = $('#cedula').val();
         var nombre = $('#nombre').val();
         var matematicas = parseFloat($('#matematicas').val());
         var fisica = parseFloat($('#fisica').val());
         var programacion = parseFloat($('#programacion').val());
 
-        // Validar campos vacíos
         if (cedula === '' || nombre === '' || isNaN(matematicas) || isNaN(fisica) || isNaN(programacion)) {
             alert('Por favor, complete todos los campos correctamente.');
             return;
         }
 
-        // Validar rango de notas
         if (matematicas < 1 || matematicas > 20 || fisica < 1 || fisica > 20 || programacion < 1 || programacion > 20) {
             alert('Las notas deben estar en el rango de 1 a 20.');
             return;
         }
 
-        // Realizar la petición AJAX para guardar los datos
         $.ajax({
             url: 'guardar_notas.php',
             method: 'POST',
@@ -34,12 +29,9 @@ $(document).ready(function() {
                 programacion: programacion
             },
             success: function(response) {
-                // Mostrar la respuesta en la tabla
                 $('#tabla').append(response);
-                // Limpiar los campos del formulario
                 $('#formulario')[0].reset();
 
-                // Calcular resultados
                 calcularResultados();
             },
             error: function() {
@@ -49,7 +41,6 @@ $(document).ready(function() {
     });
 
     function calcularResultados() {
-        // Obtener las notas de todos los estudiantes
         var notasMatematicas = [];
         var notasFisica = [];
         var notasProgramacion = [];
@@ -64,7 +55,6 @@ $(document).ready(function() {
             notasProgramacion.push(notaProgramacion);
         });
 
-        // Calcular los resultados
         var notaPromedioMatematicas = calcularPromedio(notasMatematicas);
         var notaPromedioFisica = calcularPromedio(notasFisica);
         var notaPromedioProgramacion = calcularPromedio(notasProgramacion);
@@ -84,7 +74,6 @@ $(document).ready(function() {
         var notaMaximaFisica = notasFisica.length > 0 ? Math.max(...notasFisica) : 0;
         var notaMaximaProgramacion = notasProgramacion.length > 0 ? Math.max(...notasProgramacion) : 0;
 
-        // Mostrar los resultados en la tabla
         $('#tabla-resultados').empty();
         $('#tabla-resultados').append('<tr><th>Materia</th><th>Nota Promedio</th><th>Aprobados</th><th>Aplazados</th><th>Aprobados en una Materia</th><th>Aprobados en dos Materias</th><th>Nota Máxima</th></tr>');
         $('#tabla-resultados').append('<tr><th>Matemáticas</th><td>' + notaPromedioMatematicas + '</td><td>' + alumnosAprobadosMatematicas + '</td><td>' + alumnosAplazadosMatematicas + '</td><td>' + alumnosAprobadosUnaMateria + '</td><td>' + alumnosAprobadosDosMaterias + '</td><td>' + notaMaximaMatematicas + '</td></tr>');
@@ -144,6 +133,5 @@ $(document).ready(function() {
         return contador;
     }
 
-    // Calcular resultados iniciales al cargar la página
     calcularResultados();
 });
